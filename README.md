@@ -11,11 +11,11 @@ This tool simulats an elevator System. The main file ElevatorSystem.py and two a
 ```
 from ElevatorSystem import ElevatorSystem 
 ```
-- Then make an instance of the class (input the number of elevators, default = 16):
+- Then make an instance of the class (input the number of elevators (positive number), default = 16):
 ```
 system = ElevatorSystem(<number of elevators>)
 ```
-- Now you can use two of the functions: pick and step. The pick function is a request to pick up a passenger. Inputs to pick function are floor number of passenger and direction (-1 for down, +1 for up, 0 for none). The step function processes time and updates the statuses of elevators. Input to step function is time in seconds. One second is taken for any elevator to move one floor up or down. An example of the way they can be called:
+- Now you can use two of the functions: pick and step. The pick function is a request to pick up a passenger. Inputs to pick function are floor number of passenger (>=0) and direction (-1 for down, +1 for up, 0 for none). The step function processes time and updates the statuses of elevators. Input to step function is time in seconds (>=0). One second is taken for any elevator to move one floor up or down. An example of the way they can be called:
 ```
 system.pick(4,1)
 system.step(3)
@@ -48,3 +48,4 @@ There are two accompanying examples: Easy_example.py and 16_Elevators_System_exa
 Of course the code can be improved. For instance:
 - After the pick up request is completed, another request to the floor where passenger wants to go could be processed.
 - The criteria to choose the optimum elevator could be improved
+- Checks can be added if inputs are incorrect. 
