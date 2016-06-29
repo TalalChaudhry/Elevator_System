@@ -1,5 +1,5 @@
 # Elevator_System
-
+A tool to simulate an Elevator System
 # Requirements
 - Python 3
 - Numpy installed
