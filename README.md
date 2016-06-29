@@ -23,7 +23,7 @@ system.pick(8,-1)
 system.pick(5,1)
 system.step(2)
 ```
-- The class also has one other function: update_status. This just updates the status of each elevator: its current floor, destination floors and direction. This shouldnt be called by the user
+- The class also has one other function: update_status. This just updates the status of each elevator: its current floor, destination floors and direction. This should not be called by the user
 
 # Functionality
 This tool can simulate an elevator system. It can process several pick reqests and update the elevators accordingly. The optimum elevator is chosen for each requests using the following criteria with decreasing importance:
@@ -37,6 +37,9 @@ print (system.ele_status)
 ```
 The output will be a list with each entry representing:
 ```
-[Current floor of elevator, [{"floor": pick request floor, "direction": pick request direction}], current direction]
+[Current floor of elevator, [{"floor": pick request floor, "direction": pick request direction}], current direction of elevator]
 ```
 The entry in the list corresponds to the elevator ID.
+
+# Accompanying examples
+There are two accompanying examples: Easy_example.py and 16_Elevators_System_example.py. They are provided for the user to understand better. They are also documented.
