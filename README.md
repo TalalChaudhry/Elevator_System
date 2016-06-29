@@ -1,7 +1,7 @@
 # Elevator_System
 A tool to simulate an Elevator System
 # Requirements
-- Python 3
+- Python 3 (Python 2 is enough actually. But to display the prints in the example files better, python3 should be used)
 - Numpy installed
 
 # How to run and description
