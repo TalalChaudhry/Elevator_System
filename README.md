@@ -48,4 +48,5 @@ There are two accompanying examples: Easy_example.py and 16_Elevators_System_exa
 Of course the code can be improved. For instance:
 - After the pick up request is completed, another request to the floor where passenger wants to go could be processed.
 - The criteria to choose the optimum elevator could be improved
-- Checks can be added if inputs are incorrect. 
+- Checks can be added if inputs are incorrect.
+- Testing
