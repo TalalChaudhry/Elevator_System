@@ -9,7 +9,7 @@ class ElevatorSystem:
         
         self.ele_status = [] 
         for i in range(number):
-            self.ele_status.append([0, [], 0]) # [Elevator id, Current floor, {Destination floor, direction}, current direction]
+            self.ele_status.append([0, [], 0]) # [Elevator id, Current floor, [{pick request floor floor, pick request direction}], current direction]
 
     # This updates the status of elevators
     def update_status(self, ele_id, update_goal_floor, direction): 

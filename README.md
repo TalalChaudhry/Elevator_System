@@ -15,7 +15,7 @@ from ElevatorSystem import ElevatorSystem
 ```
 system = ElevatorSystem(<number of elevators>)
 ```
-- Now you can use two of the functions: pick and step. The pick function is a request to pick up a passenger. Inputs to pick function are floor number of passenger and direction (-1 for down, +1 for up, 0 for none). The step function processes time and updates the statuses of elevators. Input to step function is time in seconds. An example of the way they can be called:
+- Now you can use two of the functions: pick and step. The pick function is a request to pick up a passenger. Inputs to pick function are floor number of passenger and direction (-1 for down, +1 for up, 0 for none). The step function processes time and updates the statuses of elevators. Input to step function is time in seconds. One second is taken for any elevator to move one floor up or down. An example of the way they can be called:
 ```
 system.pick(4,1)
 system.step(3)
@@ -25,5 +25,18 @@ system.step(2)
 ```
 - The class also has one other function: update_status. This just updates the status of each elevator: its current floor, destination floors and direction. This shouldnt be called by the user
 
+# Functionality
+This tool can simulate an elevator system. It can process several pick reqests and update the elevators accordingly. The optimum elevator is chosen for each requests using the following criteria with decreasing importance:
+- The elevator that is static is favoured over elevators that are moving
+- The elevator moving in same direction as the pick request is favoured over elevators that are moving in opposite direction
+- The elevator that is closest to the pick request is favoured over others
 
-
+To see the status of elevators, run the following command:
+```
+print (system.ele_status)
+```
+The output will be a list with each entry representing:
+```
+[Current floor of elevator, [{"floor": pick request floor, "direction": pick request direction}], current direction]
+```
+The entry in the list corresponds to the elevator ID.
