@@ -43,3 +43,8 @@ The entry in the list corresponds to the elevator ID.
 
 # Accompanying examples
 There are two accompanying examples: Easy_example.py and 16_Elevators_System_example.py. They are provided for the user to understand better. They are also documented.
+
+# Improvements
+Of course the code can be improved. For instance:
+- After the pick up request is completed, another request to the floor where passenger wants to go could be processed.
+- The criteria to choose the optimum elevator could be improved
