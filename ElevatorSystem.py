@@ -7,9 +7,10 @@ class ElevatorSystem:
     def __init__ (self, number_of_elevators = None):
         number = 16 if number_of_elevators is None else number_of_elevators
         
+        # This list contains the status of elevators
         self.ele_status = [] 
         for i in range(number):
-            self.ele_status.append([0, [], 0]) # [Elevator id, Current floor, [{pick request floor floor, pick request direction}], current direction of elevator]
+            self.ele_status.append([0, [], 0]) # [Current floor, [{pick request floor floor, pick request direction}], current direction of elevator]
 
     # This updates the status of elevators
     def update_status(self, ele_id, update_goal_floor, direction): 
@@ -28,9 +29,9 @@ class ElevatorSystem:
     # Function to make a pick up request. Determines optimum elevator to call and calls the status method to update that elevator
     def pick(self, floor_num, direction):
         #Initializing.
-        difference_1 = [] # contains list of distances from pick request floor to only static elevators' current floor
-        difference_2 = [] # contains list of distances from pick request floor to moving in same direction elevators' floor
-        busy = [] # contains list of distances from pick request to moving in opposite direction elevators' floor
+        static_elevators_difference = [] # contains list of distances from pick request floor to only static elevators' current floor
+        same_direction_moving_elevators = [] # contains list of distances from pick request floor to moving in same direction elevators' floor
+        opposite_direction_moving_elevators = [] # contains list of distances from pick request to moving in opposite direction elevators' floor
 
         # Looping over elevators' statuses
         for i,ele in enumerate(self.ele_status):
@@ -39,29 +40,29 @@ class ElevatorSystem:
                     self.update_status(i, floor_num, direction)
                     return 0
                 # Input distance of all static elevators (but not on same floor) from the pick up request floor
-                difference_1.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
+                static_elevators_difference.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
                 
             elif ele[2] == direction: #Input distance of all moving elevators in the same direction as pick up request direction
-                difference_2.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
+                same_direction_moving_elevators.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
                 
             else: #Input distance of all moving elevators but opposite direction.
-                busy.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
+                opposite_direction_moving_elevators.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
         
         # If any static elevator available, find the closest one and update the request to its status. return function
-        if len(difference_1) > 0:
-            difference_1.sort(key=lambda x:x['difference'])
-            self.update_status(difference_1[0]["ele_id"], floor_num, direction)
+        if len(static_elevators_difference) > 0:
+            static_elevators_difference.sort(key=lambda x:x['difference'])
+            self.update_status(static_elevators_difference[0]["ele_id"], floor_num, direction)
             return 0
         
         # If any elevator moving in same direction available, find the closest one and update its status. return function
-        if len(difference_2) > 0:
-            difference_2.sort(key=lambda x:x['difference'])
-            self.update_status(difference_2[0]["ele_id"], floor_num, direction)
+        if len(same_direction_moving_elevators) > 0:
+            same_direction_moving_elevators.sort(key=lambda x:x['difference'])
+            self.update_status(same_direction_moving_elevators[0]["ele_id"], floor_num, direction)
             return 0
             
-        # If all are busy and moving in opposite direction then just select the closest one.
-        best_ele_busy = min(busy, key=lambda x:x["difference"])
-        self.update_status(best_ele_busy["ele_id"], floor_num, direction)
+        # If all are opposite_direction_moving_elevators and moving in opposite direction then just select the closest one.
+        best_ele_opposite_direction_moving_elevators = min(opposite_direction_moving_elevators, key=lambda x:x["difference"])
+        self.update_status(best_ele_opposite_direction_moving_elevators["ele_id"], floor_num, direction)
         
         
     def step(self, time): # Function to process time and update the elevators' statuses
