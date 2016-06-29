@@ -17,11 +17,12 @@ class ElevatorSystem:
         self.ele_status[ele_id][1].append({"floor": update_goal_floor, "direction": direction}) # adding floor/direction entry to destination
         self.ele_status[ele_id][2] = np.sign(self.ele_status[ele_id][1][0]["floor"] - self.ele_status[ele_id][0]) # updating elevator direction
         
-        #If elevator going up, then sort floors in ascending order, and direction in descending
+        #If elevator going up, then sort pick request floors in ascending order, and direction in descending
         if self.ele_status[ele_id][2] == 1:
             self.ele_status[ele_id][1].sort(key=lambda x:x['floor'])
             self.ele_status[ele_id][1].sort(key=lambda x:x['direction'], reverse = True)
-        #Else if elevator going down, then sort floors in descending order, and direction in ascending
+
+        #Else if elevator going down, then sort pick request floors in descending order, and direction in ascending
         elif self.ele_status[ele_id][2] == -1:
             self.ele_status[ele_id][1].sort(key=lambda x:x['floor'], reverse = True)
             self.ele_status[ele_id][1].sort(key=lambda x:x['direction'])
@@ -38,7 +39,7 @@ class ElevatorSystem:
             if ele[2] == 0: # If an elevator is static
                 if ele[0] == floor_num: # And if elevator is on same floor as request. That elevator is processed to pick up. Return function
                     self.update_status(i, floor_num, direction)
-                    return
+                    return 0
                 # Input distance of all static elevators (but not on same floor) from the pick up request floor
                 static_elevators_difference.append({"difference": abs(ele[0] - floor_num), "ele_id": i})
                 
@@ -52,13 +53,13 @@ class ElevatorSystem:
         if len(static_elevators_difference) > 0:
             static_elevators_difference.sort(key=lambda x:x['difference'])
             self.update_status(static_elevators_difference[0]["ele_id"], floor_num, direction)
-            return
+            return 0
         
         # If any elevator moving in same direction available, find the closest one and update its status. return function
         if len(same_direction_moving_elevators) > 0:
             same_direction_moving_elevators.sort(key=lambda x:x['difference'])
             self.update_status(same_direction_moving_elevators[0]["ele_id"], floor_num, direction)
-            return
+            return 0
             
         # If all are opposite_direction_moving_elevators and moving in opposite direction then just select the closest one.
         best_ele_opposite_direction_moving_elevators = min(opposite_direction_moving_elevators, key=lambda x:x["difference"])
