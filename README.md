@@ -1,6 +1,4 @@
 # Elevator_System
-NOTE: Only see master branch for the evaluation of the task. Using develop branch just to add new features. I like the problem :)
-
 A tool to simulate an Elevator System
 # Requirements
 - Python 3 (Python 2 is enough actually. But to display the prints in the example files better, python3 should be used)
