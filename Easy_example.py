@@ -7,9 +7,9 @@ system = ElevatorSystem(3)
 print('Elevator status print format [Current floor of Elevator, [{"floor": pick request floor, "direction": pick request direction}], current direction of elevator]', '\n')
 
 # 3 pick up calls
-system.pick(3,1)
-system.pick(5,-1)
-system.pick(8,-1)
+system.pick(3,1,5)
+system.pick(5,-1,2)
+system.pick(8,-1,3)
 
 #print should show pick up calls in elevators status
 print('####################')
@@ -17,8 +17,8 @@ print('Elevators status')
 print(system.ele_status)
 print('####################', '\n')
 
-# calling step with 1 seconds
-system.step(1)
+# calling step with 2 seconds
+system.step(2)
 
 # printing elevators status after step
 print('####################')
@@ -27,7 +27,7 @@ print(system.ele_status)
 print('####################', '\n')
 
 # pick call
-system.pick(2, 1)
+system.pick(2, 1, 4)
 
 #print should show pick up calls in elevators status
 print('####################')
@@ -45,8 +45,8 @@ print(system.ele_status)
 print('####################', '\n')
 
 # pick calls
-system.pick(1,-1)
-system.pick(9,-1)
+system.pick(1,-1, 0)
+system.pick(9,-1, 7)
 
 #print should show pick up calls in elevators status
 print('####################')
@@ -64,7 +64,7 @@ print(system.ele_status)
 print('####################', '\n')
 
 #pick calls
-system.pick(5,-1)
+system.pick(5,-1, 3)
 
 #print should show pick up calls in elevators status
 print('####################')
